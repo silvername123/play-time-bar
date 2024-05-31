@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "jsx": "react",
+    // 其他选项
+    "noEmit": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "demo/**/*.tsx",
+    "demo/**/*.ts",
+    "typing.d.ts"
+  ]
+}
