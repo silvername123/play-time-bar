@@ -110,7 +110,7 @@ const defaultSettingObject = {
     y: 43,
   },
 };
-export const TimeProgress = (props: TimeProgressProps, ref: any) => {
+export const PlayTimeBar = (props: TimeProgressProps, ref: any) => {
   const {
     nowTime = dayjs().format("YYYY-MM-DD HH:mm:ss"),
     timeDataList = [test],
@@ -607,4 +607,4 @@ export const TimeProgress = (props: TimeProgressProps, ref: any) => {
   );
 };
 
-export default TimeProgress;
+export default PlayTimeBar;

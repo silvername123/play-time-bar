@@ -9,7 +9,7 @@ const prodConfig = {
     index: path.join(__dirname, "../src/myc.js"),
   },
   output: {
-    path: path.join(__dirname, "../dist"),
+    path: path.join(__dirname, "../dist/"),
     filename: "index.js",
     libraryTarget: "umd", // 采用通用模块定义
     libraryExport: "default", // 兼容 ES6 Module、CommonJS 和 AMD 模块规范
