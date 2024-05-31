@@ -1,19 +1,19 @@
 const path = require("path");
 const { merge } = require("webpack-merge");
-const baseConfig = require("./webpack.base.js"); // 引用公共的配置
+const baseConfig = require("./webpack.base.config.js"); // 引用公共的配置
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 用于将组件的css打包成单独的文件输出到`lib`目录中
 
 const prodConfig = {
   mode: "production", // 生产模式
   entry: {
-    index: path.join(__dirname, "../src/index.tsx"),
+    index: path.join(__dirname, "../src/myc.js"),
   },
   output: {
-    path: path.join(__dirname, "../lib/"),
+    path: path.join(__dirname, "../dist"),
     filename: "index.js",
     libraryTarget: "umd", // 采用通用模块定义
     libraryExport: "default", // 兼容 ES6 Module、CommonJS 和 AMD 模块规范
-    library: "tn-bar", // 打包后的库
+    library: "play-time-bar", // 打包后的库
     globalObject: "this",
     clean: true,
   },

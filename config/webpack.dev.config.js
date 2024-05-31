@@ -4,15 +4,14 @@ const baseConfig = require("./webpack.base.config.js"); // 公共配置
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  // template: path.join(__dirname, "src/index.html"),
-  filename: "./index.html",
+  template: path.join(__dirname, "../src/index.html"),
 });
 const devConfig = {
   mode: "development", // 开发模式
   entry: path.join(__dirname, "../src/index.js"), // 入口，处理资源文件的依赖关系
   output: {
-    path: path.join(__dirname, "../dev"),
-    filename: "dev.js",
+    path: path.join(__dirname, "../dev/"),
+    filename: "[name].js",
   },
   devtool: "inline-source-map",
   module: {
@@ -42,6 +41,7 @@ const devConfig = {
     ],
   },
   devServer: {
+    // 访问目录下的index.html
     static: path.join(__dirname, "../dev"),
     compress: true,
     // open: true, // 打开浏览器

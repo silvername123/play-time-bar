@@ -1,5 +1,6 @@
 const path = require("path");
-const { library } = require("webpack");
+// const { library } = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.join(__dirname, "src/index.html"),
