@@ -607,3 +607,4 @@ export const TimeProgress = (props: TimeProgressProps, ref: any) => {
   );
 };
 
+export default TimeProgress;

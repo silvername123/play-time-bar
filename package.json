@@ -2,6 +2,7 @@
   "name": "play_time_bar",
   "version": "0.0.0",
   "description": "test",
+  "main": "dist/index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack",

@@ -13,7 +13,7 @@ const prodConfig = {
     filename: "index.js",
     libraryTarget: "umd", // 采用通用模块定义
     libraryExport: "default", // 兼容 ES6 Module、CommonJS 和 AMD 模块规范
-    library: "play-time-bar", // 打包后的库
+    library: "play_time_bar", // 打包后的库
     globalObject: "this",
     clean: true,
   },
