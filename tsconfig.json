@@ -1,18 +1,22 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "commonjs",
+    // "module": "commonjs",
     "esModuleInterop": true,
     "allowJs": true,
     "jsx": "react",
     // 其他选项
-    "noEmit": false
+    "noEmit": false,
+    "module": "ESNext",
+    "declaration": true,
+    "outDir": "./dist"
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "demo/**/*.tsx",
-    "demo/**/*.ts",
-    "typing.d.ts"
+    "src/myc.tsx"
+    // "src/**/*.ts",
+    // "src/**/*.tsx",
+    // "demo/**/*.tsx",
+    // "demo/**/*.ts",
+    // "typing.d.ts"
   ]
 }

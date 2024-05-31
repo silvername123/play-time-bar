@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "test",
   "main": "dist/index.js",
+  "types": "dist/myc.d.ts",
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack",

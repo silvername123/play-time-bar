@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 用于将组
 const prodConfig = {
   mode: "production", // 生产模式
   entry: {
-    index: path.join(__dirname, "../src/myc.js"),
+    index: path.join(__dirname, "../src/myc.tsx"),
   },
   output: {
     path: path.join(__dirname, "../dist/"),
@@ -57,9 +57,9 @@ const prodConfig = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "index.module.css", // 提取后的css的文件名
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: "index.module.css", // 提取后的css的文件名
+    // }),
   ],
   externals: {
     // 定义外部依赖，避免把react和react-dom打包进去
@@ -77,4 +77,4 @@ const prodConfig = {
     },
   },
 };
-module.exports = merge(prodConfig, baseConfig); // 合并配置
+module.exports = merge(baseConfig, prodConfig); // 合并配置

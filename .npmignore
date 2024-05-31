@@ -5,3 +5,6 @@ examples
 webpack.config.js
 .history
 .test
+node_modules
+src
+*.log
