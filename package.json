@@ -1,7 +1,7 @@
 {
   "name": "@slivername/play-time-bar",
   "version": "0.0.1",
-  "description": "test",
+  "description": "A playback time progress bar",
   "main": "dist/index.js",
   "types": "dist/myc.d.ts",
   "scripts": {
