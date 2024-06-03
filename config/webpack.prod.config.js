@@ -2,6 +2,7 @@ const path = require("path");
 const { merge } = require("webpack-merge");
 const baseConfig = require("./webpack.base.config.js"); // 引用公共的配置
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 用于将组件的css打包成单独的文件输出到`lib`目录中
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const prodConfig = {
   mode: "production", // 生产模式
@@ -56,25 +57,47 @@ const prodConfig = {
       },
     ],
   },
+
   plugins: [
-    // new MiniCssExtractPlugin({
-    //   filename: "index.module.css", // 提取后的css的文件名
+    // new ModuleFederationPlugin({
+    //   name: "play-time-bar",
+    //   filename: ".js",
+    //   exposes: {
+    //     "./dist/PlayTimeBar": "./src/myc.tsx",
+    //   },
+    //   shared: {
+    //     react: {
+    //       singleton: true,
+    //       requiredVersion: "^17.0.0",
+    //     },
+    //     "react-dom": {
+    //       singleton: true,
+    //       requiredVersion: "^17.0.0",
+    //     },
+    //     dayjs: {
+    //       singleton: true,
+    //       requiredVersion: "^1.10.4",
+    //     },
+    //   },
     // }),
   ],
   externals: {
     // 定义外部依赖，避免把react和react-dom打包进去
-    react: {
-      root: "React",
-      commonjs2: "react",
-      commonjs: "react",
-      amd: "react",
-    },
-    "react-dom": {
-      root: "ReactDOM",
-      commonjs2: "react-dom",
-      commonjs: "react-dom",
-      amd: "react-dom",
-    },
+    // react: {
+    //   root: "React",
+    //   commonjs2: "react",
+    //   commonjs: "react",
+    //   amd: "react",
+    // },
+    // "react-dom": {
+    //   root: "ReactDOM",
+    //   commonjs2: "react-dom",
+    //   commonjs: "react-dom",
+    //   amd: "react-dom",
+    // },
+    react: "react", // 告诉webpack在打包时不要将react打包到组件中，而是在使用时从外部引入
+    "react-dom": "react-dom",
+    dayjs: "dayjs",
   },
 };
 module.exports = merge(baseConfig, prodConfig); // 合并配置

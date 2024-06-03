@@ -1,9 +1,9 @@
 {
   "name": "@slivername/play-time-bar",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "A playback time progress bar",
   "main": "dist/index.js",
-  "types": "dist/myc.d.ts",
+  "types": "dist/playTimeBar.d.ts",
   "scripts": {
     "start": "webpack-dev-server --open",
     "transpile": "babel src -d dist --copy-files",
