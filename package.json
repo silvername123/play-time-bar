@@ -1,6 +1,6 @@
 {
-  "name": "play-time-bar",
-  "version": "0.0.2",
+  "name": "@slivername/play-time-bar",
+  "version": "0.0.0",
   "description": "test",
   "main": "dist/index.js",
   "types": "dist/myc.d.ts",
