@@ -110,7 +110,7 @@ const defaultSettingObject = {
     y: 43,
   },
 };
-export const PlayTimeBar = (props: TimeProgressProps, ref: any) => {
+export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
   const {
     nowTime = dayjs().format("YYYY-MM-DD HH:mm:ss"),
     timeDataList = [test],

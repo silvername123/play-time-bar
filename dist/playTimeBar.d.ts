@@ -54,5 +54,5 @@ interface TimeProgressProps {
     };
     isZoom?: boolean;
 }
-export declare const PlayTimeBar: (props: TimeProgressProps, ref: any) => React.JSX.Element;
+export declare const PlayTimeBar: React.FC<TimeProgressProps>;
 export default PlayTimeBar;
