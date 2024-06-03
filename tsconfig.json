@@ -9,7 +9,8 @@
     "noEmit": false,
     "module": "ESNext",
     "declaration": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "moduleResolution": "node"
   },
   "include": [
     "src/myc.tsx"

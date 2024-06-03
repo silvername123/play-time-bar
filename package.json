@@ -6,10 +6,9 @@
   "types": "dist/myc.d.ts",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack",
     "transpile": "babel src -d dist --copy-files",
     "dev": "webpack-dev-server --config config/webpack.dev.config.js",
-    "build-prod": "webpack --config config/webpack.prod.config.js",
+    "build": "webpack --config config/webpack.prod.config.js",
     "test": "webpack-dev-server --config config/webpack.test.config.js"
   },
   "author": "",
