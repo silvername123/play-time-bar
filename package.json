@@ -1,6 +1,6 @@
 {
-  "name": "play_time_bar",
-  "version": "0.0.4",
+  "name": "play-time-bar",
+  "version": "0.0.1",
   "description": "test",
   "main": "dist/index.js",
   "types": "dist/myc.d.ts",

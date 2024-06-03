@@ -6,14 +6,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 用于将组
 const prodConfig = {
   mode: "production", // 生产模式
   entry: {
-    index: path.join(__dirname, "../src/myc.tsx"),
+    index: path.join(__dirname, "../src/playTimeBar.tsx"),
   },
   output: {
     path: path.join(__dirname, "../dist/"),
     filename: "index.js",
     libraryTarget: "umd", // 采用通用模块定义
     libraryExport: "default", // 兼容 ES6 Module、CommonJS 和 AMD 模块规范
-    library: "play_time_bar", // 打包后的库
+    library: "play-time-bar", // 打包后的库
     globalObject: "this",
     clean: true,
   },
