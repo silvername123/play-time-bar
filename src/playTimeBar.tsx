@@ -18,10 +18,11 @@ interface TimeProgressProps {
   timeDataList?: DateType[];
   // isDown 是否按下
   onMouseMove?: (time: string, isDown: boolean) => void;
-  onMouseLeave?: (time: string, isDown: boolean) => void;
-  onMouseDown?: (time: string, isDown: boolean) => void;
-  onMouseUp?: (time: string, isDown: boolean) => void;
-  onMouseEnter?: (time: string, isDown: boolean) => void;
+  onMouseLeave?: (isDown: boolean) => void;
+  onMouseDown?: () => void;
+  onMouseUp?: () => void;
+  onMouseEnter?: () => void;
+  onMouseleaveCanvasMove?: (time: string) => void;
   zoomProps?: {
     onZoomIn?: (time: string) => void;
     onZoomOut?: (time: string) => void;
@@ -65,8 +66,8 @@ interface TimeProgressProps {
   isZoom?: boolean;
 }
 const test = {
-  startTime: dayjs(dayjs().format("YYYY-MM-DD HH:00:00")).subtract(1, "hour"),
-  endTime: dayjs(dayjs().format("YYYY-MM-DD HH:00:00")).add(1, "hour"),
+  startTime: dayjs(dayjs().format("YYYY-MM-DD HH:00:00")).subtract(12, "hour"),
+  endTime: dayjs(dayjs().format("YYYY-MM-DD HH:00:00")).add(12, "hour"),
 };
 const timeId = null;
 const colorObject = {
@@ -105,7 +106,7 @@ const defaultSettingObject = {
     y: 45.5,
   },
   lineText: {
-    fontSize: 12,
+    fontSize: colorObject.lineText.fontSize,
     color: colorObject.lineText.color,
     y: 43,
   },
@@ -165,10 +166,8 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
       const recentlyLength =
         (tempTime - nowRecentlyTime) / 1000 / pxToSecondRef.current;
       const center = width / 2 - recentlyLength - 1;
-
       const leftPoints = Math.floor(center / sizeRef.current);
       const rightPoints = Math.floor((width - center) / sizeRef.current);
-
       // 点数加1 的原因 为了开始把起点的线画上去
       const leftList = Array.from({ length: leftPoints + 1 }, (_, i) => {
         const timeText = dayjs(tempTime).subtract(i, "hour").format("HH:00");
@@ -193,7 +192,7 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
         ctx?.moveTo(item.x, item.y);
         ctx?.lineTo(item.x, height);
         ctx?.stroke();
-        ctx.font = `${lineSetting?.lineText?.fontSize} serif`;
+        ctx.font = `${lineSetting?.lineText?.fontSize}px serif`;
         ctx.fillStyle = lineSetting?.lineText?.color ?? "";
         ctx.textAlign = "start";
         ctx.fillText(item.text, item.x - 14, item.y - 6);
@@ -205,7 +204,7 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
         item.y && ctx?.moveTo(item.x, item.y);
         ctx?.lineTo(item.x, height);
         ctx?.stroke();
-        ctx.font = `${lineSetting?.lineText?.fontSize ?? "12px"} serif`;
+        ctx.font = `${lineSetting?.lineText?.fontSize}px serif`;
         ctx.fillStyle = lineSetting?.lineText?.color ?? "";
         ctx.textAlign = "start";
         item.y && ctx.fillText(item.text, item.x - 14, item.y - 6);
@@ -315,7 +314,6 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
       ctx.strokeStyle =
         lineSetting.bottomLine.bottomColor ??
         defaultSettingObject.bottomLine.bottomColor;
-      //   ctx.strokeStyle = "green";
       ctx.lineWidth =
         lineSetting.bottomLine.lineWidth ??
         defaultSettingObject.bottomLine.lineWidth;
@@ -362,12 +360,11 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
       ctx: CanvasRenderingContext2D,
       time: DateType[]
     ) => {
-      const width = canvas.width;
+      // const width = canvas.width;
       let mouseTime = nowDate;
       canvas.onmouseenter = (e) => {
-        onMouseEnter?.(mouseTime, mouseRef.current.status);
+        onMouseEnter?.();
       };
-
       canvas.onmousemove = (e) => {
         if (mouseRef.current.status) {
           return;
@@ -376,23 +373,19 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
         onFill(ctx, canvas.width, canvas.height, time);
         const w = canvas.width;
         ctx.beginPath();
-        ctx.font = "12px serif";
+        ctx.font = `${lineSetting.lineText.fontSize}px serif`;
         ctx.fillStyle = "#969696";
         const center = w / 2;
         const offsetX = center - e.offsetX;
         const offsetTime = Math.abs(offsetX) * pxToSecondRef.current;
         if (offsetX > 0) {
-          ctx.fillText(
-            dayjs(nowDate).subtract(offsetTime, "s").format("HH:mm:ss"),
-            e.offsetX,
-            10
-          );
+          mouseTime = dayjs(nowDate)
+            .subtract(offsetTime, "s")
+            .format("HH:mm:ss");
+          ctx.fillText(mouseTime, e.offsetX, 10);
         } else if (offsetX < 0) {
-          ctx.fillText(
-            dayjs(nowDate).add(offsetTime, "s").format("HH:mm:ss"),
-            e.offsetX,
-            10
-          );
+          mouseTime = dayjs(nowDate).add(offsetTime, "s").format("HH:mm:ss");
+          ctx.fillText(mouseTime, e.offsetX, 10);
         }
         onDrawDate(ctx, nowDate, canvas.width);
       };
@@ -417,8 +410,8 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
               .format("YYYY-MM-DD HH:mm:ss");
           }
           onDrawDate(ctx, mouseTime, canvas.width);
-          onMouseMove?.(mouseTime, mouseRef.current.status);
         }
+        onMouseMove?.(mouseTime, mouseRef.current.status);
       };
       // 离开
       canvas.onmouseleave = (e) => {
@@ -432,19 +425,16 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
           mouseRef.current.mousedownY = undefined;
           mouseRef.current.enterTime = undefined;
         }
-        onMouseLeave?.(mouseTime, mouseRef.current.status);
+        onMouseLeave?.(mouseRef.current.status);
       };
       // 抬起
       document.onmouseup = () => {
-        // if (mouseRef.current.status) {
-        // }
-        onMouseUp?.(mouseTime, mouseRef.current.status);
+        onMouseUp?.();
         mouseRef.current.status = false;
         mouseRef.current.mousedownX = undefined;
         mouseRef.current.mousedownY = undefined;
         mouseRef.current.enterTime = undefined;
       };
-      canvas.onmouseup = (e) => {};
       // 按下
       canvas.onmousedown = (e) => {
         mouseRef.current.status = true;
@@ -454,7 +444,7 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
         mouseRef.current.mousedownX = e.clientX;
         mouseRef.current.mousedownY = e.clientY;
         mouseRef.current.enterTime = nowDate;
-        onMouseDown?.(mouseTime, mouseRef.current.status);
+        onMouseDown?.();
       };
     },
     [
