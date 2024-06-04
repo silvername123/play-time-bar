@@ -9,6 +9,7 @@ import React, {
 
 import dayjs from "dayjs";
 
+import styles from "./playTimeBar.less";
 type DateType = {
   startTime: dayjs.Dayjs;
   endTime: dayjs.Dayjs;
@@ -252,7 +253,7 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
         }
         return false;
       });
-      timeList.map((r) => {
+      timeList.map((r, index) => {
         const startTimeSecond = r.startTime.valueOf() / 1000;
         const endTimeSecond = r.endTime.valueOf() / 1000;
         //如果起始时间比左侧顶点时间小，说明区域从左侧顶点开始
@@ -283,7 +284,7 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
           ctx.fillStyle = lineSetting.recordBar?.recordColor;
           ctx.fillRect(
             X,
-            lineSetting.recordBar?.y,
+            lineSetting.recordBar?.y + index * 10,
             W,
             lineSetting.recordBar?.lineWidth
           );
@@ -597,7 +598,11 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
           </div>
         ) : null}
 
-        <canvas id="timeProgress" ref={canvasRef}></canvas>
+        <canvas
+          id="timeProgress"
+          ref={canvasRef}
+          className={styles.canvas}
+        ></canvas>
       </div>
     </>
   );
