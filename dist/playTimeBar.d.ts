@@ -8,10 +8,11 @@ interface TimeProgressProps {
     nowTime?: string;
     timeDataList?: DateType[];
     onMouseMove?: (time: string, isDown: boolean) => void;
-    onMouseLeave?: (time: string, isDown: boolean) => void;
-    onMouseDown?: (time: string, isDown: boolean) => void;
-    onMouseUp?: (time: string, isDown: boolean) => void;
-    onMouseEnter?: (time: string, isDown: boolean) => void;
+    onMouseLeave?: (isDown: boolean) => void;
+    onMouseDown?: () => void;
+    onMouseUp?: () => void;
+    onMouseEnter?: () => void;
+    onMouseleaveCanvasMove?: (time: string) => void;
     zoomProps?: {
         onZoomIn?: (time: string) => void;
         onZoomOut?: (time: string) => void;
@@ -51,6 +52,12 @@ interface TimeProgressProps {
             color?: string;
             y?: number;
         };
+    };
+    centerSetting?: {
+        fontSize?: number;
+        color?: string;
+        y?: number;
+        width: number;
     };
     isZoom?: boolean;
 }
