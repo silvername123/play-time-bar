@@ -63,6 +63,12 @@ interface TimeProgressProps {
       y?: number;
     };
   };
+  centerSetting?: {
+    fontSize?: number;
+    color?: string;
+    y?: number;
+    width: number;
+  };
   isZoom?: boolean;
 }
 const test = {
@@ -110,6 +116,12 @@ const defaultSettingObject = {
     color: colorObject.lineText.color,
     y: 43,
   },
+  centerSetting: {
+    fontSize: 16,
+    color: colorObject.lineText.color,
+    y: 60,
+    width: 20,
+  },
 };
 export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
   const {
@@ -130,6 +142,9 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
     intervalSize = 200,
     lineSetting = {
       ...defaultSettingObject,
+    },
+    centerSetting = {
+      ...defaultSettingObject.centerSetting,
     },
   } = props;
   const timeDivRef = useRef<HTMLDivElement | any>();
@@ -286,10 +301,10 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
     if (!ctx) {
       return;
     }
-    ctx.font = "16px serif";
-    ctx.fillStyle = "white";
+    ctx.font = `${centerSetting.fontSize}px serif`;
+    ctx.fillStyle = `${centerSetting.color}`;
     ctx.textAlign = "center";
-    ctx.fillText(date, width / 2 - 10, 20);
+    ctx.fillText(date, width / 2 - 10, centerSetting.width);
   };
 
   const onFill = React.useCallback(
@@ -523,15 +538,6 @@ export const PlayTimeBar: React.FC<TimeProgressProps> = (props) => {
     },
     [mouseFunction, onFill]
   );
-  //   useImperativeHandle(
-  //     ref,
-  //     () => ({
-  //       onPlay: (date) => {
-  //         console.log(date);
-  //       },
-  //     }),
-  //     []
-  //   );
 
   useEffect(() => {
     init(nowTime, timeDataList);
