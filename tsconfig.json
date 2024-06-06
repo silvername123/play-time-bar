@@ -13,11 +13,11 @@
     "moduleResolution": "node"
   },
   "include": [
-    "src/myc.tsx"
+    "src/playTimeBar.tsx",
     // "src/**/*.ts",
     // "src/**/*.tsx",
     // "demo/**/*.tsx",
     // "demo/**/*.ts",
-    // "typing.d.ts"
+    "typing.d.ts"
   ]
 }

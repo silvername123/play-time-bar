@@ -1,7 +1,7 @@
 {
   "name": "@slivername/play-time-bar",
-  "version": "1.0.1",
-  "description": "React component: progress bar for video surveillance system",
+  "version": "1.0.4",
+  "description": "progress bar for video surveillance system",
   "main": "dist/index.js",
   "types": "dist/playTimeBar.d.ts",
   "scripts": {
@@ -11,7 +11,8 @@
     "build": "webpack --config config/webpack.prod.config.js",
     "test": "webpack-dev-server --config config/webpack.test.config.js"
   },
-  "author": "",
+  "author": "slivername",
+  "homepage": "https://github.com/slivername123/play-time-bar",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.24.5",
@@ -48,5 +49,9 @@
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "react",
+    "component"
   ]
 }

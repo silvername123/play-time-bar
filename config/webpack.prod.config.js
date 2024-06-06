@@ -21,7 +21,7 @@ const prodConfig = {
   module: {
     rules: [
       {
-        test: /.css$/,
+        test: /.less$/,
         exclude: /.min.css$/,
         use: [
           { loader: "style-loader" },

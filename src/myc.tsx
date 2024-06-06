@@ -7,7 +7,11 @@ interface MyComponentProps {
 }
 
 const MyComponent: React.FC<MyComponentProps> = ({ text }) => {
-  return <div> hello {text}</div>;
+  return (
+    <div>
+      hello {dayjs().format("YYYY-MM-DD HH:mm:ss")} {text}
+    </div>
+  );
 };
 
 export default MyComponent;
