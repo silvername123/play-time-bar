@@ -14,6 +14,10 @@
   "author": "slivername123",
   "homepage": "https://github.com/silvername123/play-time-bar",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:silvername123/play-time-bar.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.4",
